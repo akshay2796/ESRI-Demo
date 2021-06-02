@@ -14,6 +14,7 @@ export const map = new WebMap({
 
 export const view = new MapView({
 	map: map,
+	center: [79.913914, 23.154596], //Center co-ordinates for jabalpur
 });
 
 export const search = new Search({ view });
@@ -57,7 +58,14 @@ export const initialize = container => {
 	view.when()
 		.then(_ => {
 			console.log("Map and View are ready");
-			view.goTo(featureLayer1.fullExtent);
+			view.goTo(
+				{
+					zoom: 15,
+				},
+				{
+					duration: 2000,
+				}
+			); //Animating to center
 		})
 		.catch(noop);
 	return () => {
